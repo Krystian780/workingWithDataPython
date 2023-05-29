@@ -5,13 +5,13 @@ class Tracker:
     def __init__(self, filePath, sheet):
         self.excelFile = pd.read_excel(filePath, sheet)
 
-    def printExcel(self):
+    def printDateFromTracker(self):
         print(self.excelFile)
 
     def printHeaders(self):
         print(self.excelFile.head())
 
-    def removeIndex(self):
+    def resetIndex(self):
         dataframe = self.excelFile
         self.excelFile = dataframe.reset_index(drop=True)
 
@@ -38,26 +38,16 @@ class Tracker:
     def setFirstRowAsHeader(self):
         self.excelFile.columns = self.excelFile.iloc[0]
 
-    def dropIndex(self):
-        df = self.excelFile
-        df = df.reset_index(drop=True)
-        self.excelFile = df
-
     def getColumnNames(self):
         return self.excelFile.columns.values
 
-    def printDataType(self):
-        print(type(self.excelFile))
-
     def retrieveFrance(self):
         return self.excelFile.loc[self.excelFile['Shipping Country'] == 'France']
-    def toExcel(self):
-        self.excelFile.to_excel('C:\\Users\\output.xlsx')
 
-    def retrieveDateColumnFromSalesForce(self):
+    def retrieveColumnCalledDate(self):
         return self.excelFile["Date"]
 
-    def retrieveDateColumnFromFrenchTracker(self):
+    def retrieveColumnCalledReceivedDate(self):
         return self.excelFile["Received date"]
 
     def convertToList(self):
@@ -65,3 +55,4 @@ class Tracker:
 
     def printDataType(self):
         print(self.excelFile.dtypes)
+
